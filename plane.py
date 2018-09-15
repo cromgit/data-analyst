@@ -10,6 +10,13 @@ class Plane(object):
     NO_NONZERO_ELTS_FOUND_MSG = 'No nonzero elements found'
 
     def __init__(self, normal_vector=None, constant_term=None):
+        '''
+
+        :param normal_vector:
+        :type normal_vector: Vector
+        :param constant_term:
+        :type constant_term: str
+        '''
         self.dimension = 3
 
         if not normal_vector:
@@ -31,6 +38,15 @@ class Plane(object):
         return Plane(
             normal_vector=self.normal_vector + other.normal_vector,
             constant_term=self.constant_term + other.constant_term)
+
+    def __getitem__(self, item):
+        '''
+        :param item:
+        :type item: int
+        :return:
+        :rtype: Decimal
+        '''
+        return self.normal_vector[item]
 
     def set_basepoint(self):
         try:
@@ -104,6 +120,20 @@ class Plane(object):
                 return k
         raise Exception(Plane.NO_NONZERO_ELTS_FOUND_MSG)
 
+    def get_nonzero_index(self):
+        '''
+
+        :return:
+        :rtype: int
+        '''
+        try:
+            return Plane.first_nonzero_index(self.normal_vector)
+        except Exception as e:
+            if (str(e) == Plane.NO_NONZERO_ELTS_FOUND_MSG):
+                return -1
+            else:
+                raise e
+
     def is_parallel(self, other):
         return self.normal_vector.is_parallel(other.normal_vector)
 
@@ -111,13 +141,12 @@ class Plane(object):
         if self.is_parallel(other):
             if (self.normal_vector.is_zero_vector() and other.normal_vector.is_zero_vector()):
                 return True
-            if not self.basepoint:
-                return False
+            if not self.basepoint or not other.basepoint:
+                return self.normal_vector == other.normal_vector and self.constant_term == other.constant_term
             basepoint_diff = self.basepoint - other.basepoint
             return basepoint_diff.is_orthogonal(self.normal_vector)
 
         return False
-
 
 
 class MyDecimal(Decimal):

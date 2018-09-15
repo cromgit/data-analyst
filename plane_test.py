@@ -5,7 +5,7 @@ from plane import Plane
 from vector import Vector
 import unittest
 
-print 'Quiz 1'
+print('Quiz 1')
 
 def tdv(array):
     return Vector(map(lambda x: MyDecimal(x), array))
@@ -22,11 +22,11 @@ q1_array = [
     Line(tdv(['1.773','8.343']), td('9.525'))
 ]
 
-print q1_array[0].intercept(q1_array[1])
-print q1_array[2].intercept(q1_array[3])
-print q1_array[4].intercept(q1_array[5])
+print(q1_array[0].intercept(q1_array[1]))
+print(q1_array[2].intercept(q1_array[3]))
+print(q1_array[4].intercept(q1_array[5]))
 
-print 'Quiz 2'
+print('Quiz 2')
 
 q2_array = [
     Plane(tdv(['-0.412', '3.806','0.728']), td('-3.46')),
@@ -37,9 +37,9 @@ q2_array = [
     Plane(tdv(['-2.642','2.875','-2.404']), td('-2.443'))
 ]
 
-print q2_array[0].is_parallel(q2_array[1]), q2_array[0] == q2_array[1]
-print q2_array[2].is_parallel(q2_array[3]), q2_array[2] == q2_array[3]
-print q2_array[4].is_parallel(q2_array[5]), q2_array[4] == q2_array[5]
+print(q2_array[0].is_parallel(q2_array[1]), q2_array[0] == q2_array[1])
+print(q2_array[2].is_parallel(q2_array[3]), q2_array[2] == q2_array[3])
+print(q2_array[4].is_parallel(q2_array[5]), q2_array[4] == q2_array[5])
 
 
 # -x + y + z + x - 4y + 4z = -2 + 21
